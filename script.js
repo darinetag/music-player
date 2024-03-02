@@ -85,5 +85,8 @@ let userData = {
 };
 
 const renderSongs = (array) => {
-  const songsHTML = array.map((song) => {});
+  const songsHTML = array.map((song) => {
+    return `
+    <li id="song-${song.id}" class="playlist-song">`;
+  });
 };
