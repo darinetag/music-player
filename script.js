@@ -4,6 +4,7 @@ const pauseButton = document.getElementById("pause");
 const nextButton = document.getElementById("next");
 const previousButton = document.getElementById("previous");
 const shuffleButton = document.getElementById("shuffle");
+
 const allSongs = [
   {
     id: 0,
@@ -78,6 +79,7 @@ const allSongs = [
 ];
 
 const audio = new Audio();
+
 let userData = {
   songs: [...allSongs],
   currentSong: null,
@@ -87,6 +89,10 @@ let userData = {
 const renderSongs = (array) => {
   const songsHTML = array.map((song) => {
     return `
-    <li id="song-${song.id}" class="playlist-song">`;
+      <li id="song-${song.id}" class="playlist-song">
+<button class="playlist-song-info"><span class="playlist-song-title">${song.title}</span></button>
+      
+      </li>
+      `;
   });
 };
