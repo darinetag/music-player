@@ -103,7 +103,7 @@ const playSong = (id) => {
 
 const renderSongs = (array) => {
   const songsHTML = array
-    .map((song) => {
+    .map((song)=> {
       return `
       <li id="song-${song.id}" class="playlist-song">
       <button class="playlist-song-info">
@@ -123,8 +123,15 @@ const renderSongs = (array) => {
   playlistSongs.innerHTML = songsHTML;
 };
 
+playButton.addEventListener("click", () => {
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  }
+
+});
+
 const sortSongs = () => {
-  userData?.songs.sort((a, b) => {
+  userData?.songs.sort((a,b) => {
     if (a.title < b.title) {
       return -1;
     }
@@ -139,4 +146,5 @@ const sortSongs = () => {
   return userData?.songs;
 };
 
-renderSongs(sortSongs());
+
+renderSongs(userData?.songs);
