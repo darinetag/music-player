@@ -103,10 +103,10 @@ const playSong = (id) => {
 
 const renderSongs = (array) => {
   const songsHTML = array
-    .map((song)=> {
+    .map((song) => {
       return `
       <li id="song-${song.id}" class="playlist-song">
-      <button class="playlist-song-info">
+      <button class="playlist-song-info" onclick = "playSong(${song.id})">
           <span class="playlist-song-title">${song.title}</span>
           <span class="playlist-song-artist">${song.artist}</span>
           <span class="playlist-song-duration">${song.duration}</span>
@@ -126,12 +126,13 @@ const renderSongs = (array) => {
 playButton.addEventListener("click", () => {
   if (userData?.currentSong === null) {
     playSong(userData?.songs[0].id);
+  } else {
+    playSong(userData?.currentSong.id);
   }
-
 });
 
 const sortSongs = () => {
-  userData?.songs.sort((a,b) => {
+  userData?.songs.sort((a, b) => {
     if (a.title < b.title) {
       return -1;
     }
@@ -145,6 +146,5 @@ const sortSongs = () => {
 
   return userData?.songs;
 };
-
 
 renderSongs(userData?.songs);
