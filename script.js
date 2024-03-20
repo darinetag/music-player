@@ -103,12 +103,13 @@ const playSong = (id) => {
 
 const pauseSong = () => {
   userData.songCurrentTime = audio.currentTime;
-
+  playButton.classList.remove("playing");
+  audio.pause();
 };
 
 const renderSongs = (array) => {
   const songsHTML = array
-    .map((song)=> {
+    .map((song) => {
       return `
       <li id="song-${song.id}" class="playlist-song">
       <button class="playlist-song-info" onclick="playSong(${song.id})">
@@ -129,7 +130,7 @@ const renderSongs = (array) => {
 };
 
 playButton.addEventListener("click", () => {
-    if (userData?.currentSong === null) {
+  if (userData?.currentSong === null) {
     playSong(userData?.songs[0].id);
   } else {
     playSong(userData?.currentSong.id);
@@ -137,7 +138,7 @@ playButton.addEventListener("click", () => {
 });
 
 const sortSongs = () => {
-  userData?.songs.sort((a,b) => {
+  userData?.songs.sort((a, b) => {
     if (a.title < b.title) {
       return -1;
     }
