@@ -106,7 +106,7 @@ const playSong = (id) => {
 
 const pauseSong = () => {
   userData.songCurrentTime = audio.currentTime;
-
+  
   playButton.classList.remove("playing");
   audio.pause();
 };
@@ -122,14 +122,14 @@ const playNextSong = () => {
   }
 };
 
-const playPreviousSong = () => {
-  if (userData?.currentSong === null) return;
-  else {
+const playPreviousSong = () =>{
+   if (userData?.currentSong === null) return;
+   else {
     const currentSongIndex = getCurrentSongIndex();
     const previousSong = userData?.songs[currentSongIndex - 1];
 
     playSong(previousSong.id);
-  }
+   }
 };
 
 const shuffle = () => {
@@ -153,16 +153,22 @@ const deleteSong = (id) => {
   }
 
   userData.songs = userData?.songs.filter((song) => song.id !== id);
-  renderSongs(userData?.songs);
-  highlightCurrentSong();
-  setPlayButtonAccessibleText();
+  renderSongs(userData?.songs); 
+  highlightCurrentSong(); 
+  setPlayButtonAccessibleText(); 
 
   if (userData?.songs.length === 0) {
     const resetButton = document.createElement("button");
     const resetText = document.createTextNode("Reset Playlist");
+
     resetButton.id = "reset";
     resetButton.ariaLabel = "Reset playlist";
+    resetButton.appendChild(resetText);
+    playlistSongs.appendChild(resetButton);
+
+  
   }
+
 };
 
 const setPlayerDisplay = () => {
@@ -190,7 +196,7 @@ const highlightCurrentSong = () => {
 
 const renderSongs = (array) => {
   const songsHTML = array
-    .map((song) => {
+    .map((song)=> {
       return `
       <li id="song-${song.id}" class="playlist-song">
       <button class="playlist-song-info" onclick="playSong(${song.id})">
@@ -219,18 +225,17 @@ const setPlayButtonAccessibleText = () => {
   );
 };
 
-const getCurrentSongIndex = () =>
-  userData?.songs.indexOf(userData?.currentSong);
+const getCurrentSongIndex = () => userData?.songs.indexOf(userData?.currentSong);
 
 playButton.addEventListener("click", () => {
-  if (userData?.currentSong === null) {
+    if (userData?.currentSong === null) {
     playSong(userData?.songs[0].id);
   } else {
     playSong(userData?.currentSong.id);
   }
 });
 
-pauseButton.addEventListener("click", pauseSong);
+pauseButton.addEventListener("click",  pauseSong);
 
 nextButton.addEventListener("click", playNextSong);
 
@@ -239,7 +244,7 @@ previousButton.addEventListener("click", playPreviousSong);
 shuffleButton.addEventListener("click", shuffle);
 
 const sortSongs = () => {
-  userData?.songs.sort((a, b) => {
+  userData?.songs.sort((a,b) => {
     if (a.title < b.title) {
       return -1;
     }
